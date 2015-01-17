@@ -12,7 +12,7 @@
 #import "JXEmptyViewController.h"
 
 @implementation AppDelegate
-@synthesize window,faceView,mainVc,groupVC;
+@synthesize window,faceView,mainVc,groupVC,loginVC;
 
 - (void)dealloc
 {

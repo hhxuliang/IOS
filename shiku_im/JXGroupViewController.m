@@ -34,7 +34,7 @@
         _array = [[NSMutableArray alloc] init];
         _page=0;
         _isLoading=0;
-        [self find];
+        //[self find];
 
         self.view.frame = CGRectMake(0, 0, 320, JX_SCREEN_HEIGHT-49-44);
 //        [self buildButtons];

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2069541718439E69007F1FED /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2069541518439E69007F1FED /* AudioToolbox.framework */; };
 		2069541818439E69007F1FED /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2069541618439E69007F1FED /* AVFoundation.framework */; };
+		264955091A663A9600EAD70A /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 264955081A663A9600EAD70A /* AsyncSocket.m */; };
 		840016DD17BBB7870073EB8E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 840016DC17BBB7870073EB8E /* libsqlite3.dylib */; };
 		8409055A17B693CF00F5C28D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8409055917B693CF00F5C28D /* UIKit.framework */; };
 		8409055C17B693CF00F5C28D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8409055B17B693CF00F5C28D /* Foundation.framework */; };
@@ -462,6 +463,8 @@
 /* Begin PBXFileReference section */
 		2069541518439E69007F1FED /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2069541618439E69007F1FED /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		264955071A663A9600EAD70A /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		264955081A663A9600EAD70A /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
 		840016DC17BBB7870073EB8E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		8409055617B693CF00F5C28D /* shiku_im.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shiku_im.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8409055917B693CF00F5C28D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1177,6 +1180,8 @@
 		CC4991AC18FFD8A0000C07CD /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				264955071A663A9600EAD70A /* AsyncSocket.h */,
+				264955081A663A9600EAD70A /* AsyncSocket.m */,
 				CCE240E218FFB8EB00A3CB5A /* Photo.h */,
 				CCE240E318FFB8EB00A3CB5A /* Photo.m */,
 				CC4991AD18FFD910000C07CD /* XMPP */,
@@ -2795,6 +2800,7 @@
 				CCE242C818FFB8EB00A3CB5A /* JXGroupViewController.m in Sources */,
 				CCE2420118FFB8EB00A3CB5A /* XMPPRoomOccupantHybridMemoryStorageObject.m in Sources */,
 				CCE242EA18FFB8EB00A3CB5A /* DDTTYLogger.m in Sources */,
+				264955091A663A9600EAD70A /* AsyncSocket.m in Sources */,
 				CCE2421E18FFB8EB00A3CB5A /* XMPPCapsResourceCoreDataStorageObject.m in Sources */,
 				CCE2416418FFB8EB00A3CB5A /* ASIDataDecompressor.m in Sources */,
 				CCE2415718FFB8EB00A3CB5A /* amrFileCodec.mm in Sources */,
@@ -2971,6 +2977,7 @@
 					"$(SRCROOT)/shiku_im/Vendor/libidn",
 					"$(SRCROOT)/shiku_im/amr_wav/VoiceConvert/lib",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = shiku_im;
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
@@ -2993,6 +3000,7 @@
 					"$(SRCROOT)/shiku_im/Vendor/libidn",
 					"$(SRCROOT)/shiku_im/amr_wav/VoiceConvert/lib",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = shiku_im;
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";

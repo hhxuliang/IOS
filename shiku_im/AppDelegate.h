@@ -9,6 +9,7 @@
 
 @class emojiViewController;
 @class JXMainViewController;
+@class JXLoginViewController;
 @class JXGroupViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>{
@@ -29,5 +30,6 @@
 
 @property (retain, nonatomic) emojiViewController* faceView;
 @property (retain, nonatomic) JXGroupViewController* groupVC;
+@property (retain, nonatomic) JXLoginViewController* loginVC;
 @property (retain, nonatomic) JXMainViewController *mainVc;
 @end

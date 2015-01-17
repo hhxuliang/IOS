@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h> 
 #import "XMPPFramework.h"
+#import "AsyncSocket.h"
+#define SRV_CONNECTED 0
+#define SRV_CONNECT_SUC 1
+#define SRV_CONNECT_FAIL 2
+#define HOST_IP @"192.168.8.1"
+#define HOST_PORT 8000
 
 @class JXMessageObject;
 @class JXRoomPool;
@@ -22,6 +28,7 @@
     XMPPRosterCoreDataStorage *xmppRosterStorage;
     
    	NSString *password;
+    NSString *receivebuf;
 	
 	BOOL allowSelfSignedCertificates;
 	BOOL allowSSLHostNameMismatch;
@@ -29,6 +36,8 @@
 	BOOL isXmppConnected;
     FMDatabase* _db;
     NSString* _userIdOld;
+    
+    AsyncSocket *client;
 }
 
 - (NSManagedObjectContext *)managedObjectContext_roster;
@@ -38,6 +47,15 @@
 @property (assign, nonatomic) XMPPStream* stream;
 @property (assign, nonatomic) BOOL isLogined;
 @property (retain, nonatomic) JXRoomPool* roomPool;
+@property (nonatomic, retain) AsyncSocket *client;
+
+- (int) connectServer: (NSString *) hostIP port:(int) hostPort;
+- (void) showMessage:(NSString *) msg;
+- (void) sendMsg;
+- (void) reConnect;
+
+
+
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 

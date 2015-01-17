@@ -54,6 +54,170 @@ static JXXMPP *sharedManager;
     
     return sharedManager;
 }
+/////////////////////////////////////////////////asyn_socket//////////////////////////////////////////////////////////
+//链接server
+- (int) connectServer: (NSString *) hostIP port:(int) hostPort{
+    
+    if (client == nil)
+    {
+        client = [[AsyncSocket alloc] initWithDelegate:self];
+        NSError *err = nil;
+        //192.168.110.128
+        if (![client connectToHost:hostIP onPort:hostPort error:&err])
+        {
+            NSLog(@"%@ %@", [err code], [err localizedDescription]);
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[@"Connection failed to host "
+                                                                     stringByAppendingString:hostIP]
+                                                            message:[[[NSString alloc]initWithFormat:@"%@",[err code]] stringByAppendingString:[err localizedDescription]]
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+            //client = nil;
+            return SRV_CONNECT_FAIL;
+        }
+        else
+        {
+            NSLog(@"Conectou!");
+            return SRV_CONNECT_SUC;
+        }
+    }
+    else
+    {
+        [client readDataWithTimeout:-1 tag:0];
+        return SRV_CONNECTED;
+    }
+    
+}
+
+- (void) reConnect{
+    int stat = [self connectServer:HOST_IP port:HOST_PORT];
+    switch (stat) {
+        case SRV_CONNECT_SUC:
+            [self showMessage:@"connect success"];
+            break;
+        case SRV_CONNECTED:
+            //[self showMessage:@"It's connected,don't agian"];
+            break;
+        default:
+            break;
+    }
+}
+- (void)sendMsg:(NSString *) inputMsgStr{
+    [self reConnect];
+    NSString * content = [inputMsgStr stringByAppendingString:@"\r\n"];
+    NSLog(@"inputMsgStr is %@",content);
+    NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
+    [client writeData:data withTimeout:-1 tag:0];
+    
+    //[data release];
+    //[content release];
+    //[inputMsgStr release];
+    //继续监听读取
+    //[client readDataWithTimeout:-1 tag:0];
+}
+- (void) showMessage:(NSString *) msg{
+    UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Alert!"
+                                                    message:msg
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+}
+#pragma mark socket delegate
+
+- (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port{
+    [client readDataWithTimeout:-1 tag:0];
+}
+
+- (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err
+{
+    NSLog(@"Error is %@", [err localizedDescription]);
+}
+
+- (void)onSocketDidDisconnect:(AsyncSocket *)sock
+{
+    NSString *msg = @"Sorry this connect is failure";
+    [self showMessage:msg];
+    [msg release];
+    client = nil;
+}
+
+- (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
+{
+    
+    NSString* aStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"Hava received datas is :%@",aStr);
+    if(receivebuf==nil)
+        receivebuf=[[NSString alloc] initWithFormat:@""];
+    NSString* aStr_tmp = [receivebuf stringByAppendingString:aStr];
+    
+    NSRange range =[aStr_tmp rangeOfString:@"$(KIDSOVER)"];
+    
+    
+    
+    if(range.length==0)
+        
+    {
+        [receivebuf release];
+        receivebuf = [[NSString alloc] initWithString:aStr_tmp];
+        
+        [aStr release];
+        return;
+        
+    }
+    
+    NSString *msg = [aStr_tmp substringToIndex:range.location];
+    [receivebuf release];
+    receivebuf = [[NSString alloc] initWithString:[aStr_tmp substringFromIndex:range.location+11]];
+
+    SBJsonParser *paser=[[[SBJsonParser alloc]init]autorelease];
+    NSDictionary *rootDic=[paser objectWithString:msg];
+    if(rootDic==nil){
+        NSLog(@"Hava received error json datas");
+        return;
+    }
+    int TranObjectType=[[rootDic objectForKey:@"TranObjectType"] intValue];
+    
+    if (TranObjectType ==1) {
+        [g_App.loginVC loginSuccess:msg];
+    }
+    if(TranObjectType==5){
+        NSDictionary *msgjson=[rootDic objectForKey:@"TranObject"];
+
+        
+        JXMessageObject *msg=[[JXMessageObject alloc] init];
+        
+        //创建message对象
+        [msg fromDictionary:msgjson];
+            
+        if(msg.type != nil ){
+            //if([type isEqualToString:@"chat"]){
+                [msg save];
+            //}
+        }
+        
+        if([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive)
+        {
+            // We are not active, so use a local notification instead
+            UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+            localNotification.alertAction = @"Ok";
+            localNotification.alertBody = [NSString stringWithFormat:@"From: %@\n\n%@",@"新消息:",@"123"];
+            //        localNotification.userInfo  = [NSDictionary dictionaryWithObject:msg forKey:@"newMsg"];
+            
+            [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+        }
+        
+        [msg release];
+    }
+    
+    [aStr release];
+    [client readDataWithTimeout:-1 tag:0];
+}
+/////////////////////////////////////////////////asyn_socket//////////////////////////////////////////////////////////
 
 -(void)login{
     if(isLogined)
@@ -79,6 +243,7 @@ static JXXMPP *sharedManager;
     [_db release];
 	[self teardownStream];
     [roomPool release];
+    [client release];
     [super dealloc];
 }
 
@@ -119,7 +284,10 @@ static JXXMPP *sharedManager;
     }
     
     [aMessage addChild:[DDXMLNode elementWithName:@"body" stringValue:jsonString]];
-    [xmppStream sendElement:aMessage];
+    //[xmppStream sendElement:aMessage];
+    NSString *send_msg = @"{\"TranObjectType\":\"5\",\"fromUser\":2077,\"toUser\":2077,\"crowd\":0,\"fromusername\":\"徐亮\",\"fromimg\":\"\",\"TranObject\":%@}";
+    NSString *msgtxt= [[NSString alloc]initWithFormat:send_msg,jsonString];
+    [self sendMsg:msgtxt];
 }
 
 

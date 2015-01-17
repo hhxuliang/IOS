@@ -71,6 +71,7 @@
         _user.returnKeyType = UIReturnKeyNext;
         _user.clearButtonMode = UITextFieldViewModeWhileEditing;
         _user.placeholder = @"请输入用户名";
+        [[NSUserDefaults standardUserDefaults]setObject:@"徐亮" forKey:kMY_USER_LoginName];
         [_table addSubview:_user];
         [_user release];
 
@@ -83,8 +84,10 @@
         _pwd.returnKeyType = UIReturnKeyDone;
         _pwd.clearButtonMode = UITextFieldViewModeWhileEditing;
         _pwd.placeholder = @"请输入密码";
+        [[NSUserDefaults standardUserDefaults]setObject:@"e10adc3949ba59abbe56e057f20f883e" forKey:kMY_USER_PASSWORD];
         [_table addSubview:_pwd];
         [_pwd release];
+        g_App.loginVC = self;
     }
     return self;
 }
@@ -117,17 +120,48 @@
 }
 
 -(void)onClick{
-    ASIFormDataRequest *request=[ASIFormDataRequest requestWithURL:API_BASE_URL(@"user/login")];
-    [request setPostValue:_user.text forKey:@"userName"];
-    [request setPostValue:_pwd.text forKey:@"userPassword"];
-    [request setPostValue:[NSString stringWithFormat:@"WeChat-V%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]] forKey:@"versionInfo"];
-    [request setPostValue:[[[UIDevice currentDevice]systemName]stringByAppendingString:[[UIDevice currentDevice]systemVersion]] forKey:@"deviceInfo"];
-    [request setDelegate:self];
-    [request setDidFinishSelector:@selector(requestSuccess:)];
-    [request setDidFailSelector:@selector(requestError:)];
-    [request startAsynchronous];
+    NSString *send_msg_format = @"{\"TranObjectType\":\"1\",\"fromUser\":0,\"toUser\":0,\"crowd\":0,\"fromusername\":\"%@\",\"fromimg\":\"\",\"TranObject\":{\"id\":\"2077\",\"mobile_NO\":\"\",\"name\":\"%@\",\"email\":\"\",\"password\":\"%@\",\"isOnline\":\"\",\"img\":\"\",\"group\":\"\",\"ip\":\"\",\"port\":\"\",\"iscrowd\":\"\",\"platform\":\"IOS\"}}";
+    NSString *msgtxt= [[NSString alloc]initWithFormat:send_msg_format,_user.text,_user.text,_pwd.text];
+    [[JXXMPP sharedInstance] sendMsg:msgtxt];//发送消息
+    [msgtxt release];
+    [send_msg_format release];
+    
 }
-
+-(void)loginSuccess:(NSString*)response
+{
+    NSLog(@"response:%@",response);
+    SBJsonParser *paser=[[[SBJsonParser alloc]init]autorelease];
+    NSDictionary *rootDic=[paser objectWithString:response];
+    
+    int resultCode=[[rootDic objectForKey:@"resultCode"]intValue];
+    if (TRUE) {
+        NSLog(@"登陆成功");
+        NSArray *userArr=[rootDic objectForKey:@"TranObject"];
+        for (NSDictionary *dic in userArr)
+        {
+            JXUserObject *user=[JXUserObject userFromDictionary:dic];
+            if ([_user.text isEqualToString:user.userNickname]) {
+                [[NSUserDefaults standardUserDefaults]setObject:_user.text forKey:kMY_USER_LoginName];
+                [[NSUserDefaults standardUserDefaults]setObject:_pwd.text forKey:kMY_USER_PASSWORD];
+                [[NSUserDefaults standardUserDefaults]setObject:user.userId forKey:kMY_USER_ID];
+                [[NSUserDefaults standardUserDefaults]setObject:user.userNickname forKey:kMY_USER_NICKNAME];
+                [[NSUserDefaults standardUserDefaults]setObject:user.userHead forKey:kMY_USER_Head];
+                //立刻保存信息
+                [[NSUserDefaults standardUserDefaults]synchronize];
+            }
+            if (![JXUserObject haveSaveUserById:user.userId]){
+                [JXUserObject saveNewUser:user];
+                [[NSNotificationCenter defaultCenter]postNotificationName:kXMPPNewFriendNotifaction object:nil userInfo:nil];
+            }
+        }
+    }else
+    {
+        NSLog(@"登陆失败,原因:%@",[rootDic objectForKey:@"msg"]);
+    }
+    [JXXMPP sharedInstance].isLogined = YES;
+    [g_App.mainVc onAfterLogin];
+    [self actionQuit];
+}
 #pragma mark  -------网络请求回调----------
 -(void)requestSuccess:(ASIFormDataRequest*)request
 {
