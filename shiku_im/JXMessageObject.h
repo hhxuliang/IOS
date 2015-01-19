@@ -28,8 +28,8 @@
 //#define kMESSAGE_ @""
 
 enum kWCMessageType {
-    kWCMessageTypeText = 1,
-    kWCMessageTypeImage = 2,
+    kWCMessageTypeText = 0,
+    kWCMessageTypeImage = 1,
     kWCMessageTypeVoice = 3,
     kWCMessageTypeLocation=4,
     kWCMessageTypeGif=5

@@ -14,7 +14,7 @@
 #define SRV_CONNECT_SUC 1
 #define SRV_CONNECT_FAIL 2
 #define HOST_IP @"192.168.8.1"
-#define HOST_PORT 8000
+#define HOST_PORT 8001
 
 @class JXMessageObject;
 @class JXRoomPool;

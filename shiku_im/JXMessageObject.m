@@ -235,7 +235,7 @@
     
     NSMutableArray *messageList=[[NSMutableArray alloc]init];
     
-    NSString *queryString=[NSString stringWithFormat:@"select * from msg_%@ where fromUserId=? or toUserId=? order by timeSend desc limit ?*20,20",userId];
+    NSString *queryString=[NSString stringWithFormat:@"select * from msg_%@ where fromUserId=? or toUserId=? order by messageNo desc limit ?*20,20",userId];
     
     NSMutableArray* temp = [[NSMutableArray alloc]init];
     FMResultSet *rs=[db executeQuery:queryString,userId,userId,[NSNumber numberWithInt:pageIndex]];

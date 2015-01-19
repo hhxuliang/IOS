@@ -151,23 +151,22 @@ static JXXMPP *sharedManager;
     
     NSString* aStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"Hava received datas is :%@",aStr);
+    if(aStr == nil)
+        return;
     if(receivebuf==nil)
         receivebuf=[[NSString alloc] initWithFormat:@""];
-    NSString* aStr_tmp = [receivebuf stringByAppendingString:aStr];
+    NSString* aStr_tmp = [[NSString alloc] initWithString:[receivebuf stringByAppendingString:aStr]];
     
+    do{
     NSRange range =[aStr_tmp rangeOfString:@"$(KIDSOVER)"];
-    
-    
-    
     if(range.length==0)
         
     {
         [receivebuf release];
         receivebuf = [[NSString alloc] initWithString:aStr_tmp];
-        
         [aStr release];
+        [aStr_tmp release];
         return;
-        
     }
     
     NSString *msg = [aStr_tmp substringToIndex:range.location];
@@ -213,8 +212,12 @@ static JXXMPP *sharedManager;
         
         [msg release];
     }
-    
+    [aStr_tmp release];
+    aStr_tmp = [[NSString alloc] initWithString: receivebuf];
+    }
+    while([aStr_tmp rangeOfString:@"$(KIDSOVER)"].length>0);
     [aStr release];
+    [aStr_tmp release];
     [client readDataWithTimeout:-1 tag:0];
 }
 /////////////////////////////////////////////////asyn_socket//////////////////////////////////////////////////////////
@@ -285,8 +288,8 @@ static JXXMPP *sharedManager;
     
     [aMessage addChild:[DDXMLNode elementWithName:@"body" stringValue:jsonString]];
     //[xmppStream sendElement:aMessage];
-    NSString *send_msg = @"{\"TranObjectType\":\"5\",\"fromUser\":2077,\"toUser\":2077,\"crowd\":0,\"fromusername\":\"徐亮\",\"fromimg\":\"\",\"TranObject\":%@}";
-    NSString *msgtxt= [[NSString alloc]initWithFormat:send_msg,jsonString];
+    NSString *send_msg = @"{\"TranObjectType\":\"5\",\"fromUser\":%@,\"toUser\":%@,\"crowd\":0,\"fromusername\":\"徐亮\",\"fromimg\":\"\",\"TranObject\":%@}";
+    NSString *msgtxt= [[NSString alloc]initWithFormat:send_msg,msg.fromUserId,msg.toUserId,jsonString];
     [self sendMsg:msgtxt];
 }
 
