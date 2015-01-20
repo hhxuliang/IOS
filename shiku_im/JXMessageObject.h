@@ -24,6 +24,7 @@
 #define kMESSAGE_ISSEND @"isSend"
 #define kMESSAGE_ISREAD @"isRead"
 #define kMESSAGE_FILESIZE @"fileSize"
+#define kMESSAGE_SERVERDATEKEY @"serverdatekey"
 //#define kMESSAGE_ @""
 //#define kMESSAGE_ @""
 
@@ -45,6 +46,7 @@ enum kWCMessageType {
 @property (nonatomic,retain) NSString*  toUserId;//目标
 @property (nonatomic,retain) NSString*  content;//内容
 @property (nonatomic,retain) NSString*  fileName;//文件名
+@property (nonatomic,retain) NSString*  serverdatekey;
 @property (nonatomic,retain) NSNumber*  fileSize;//文件尺寸
 @property (nonatomic,retain) NSNumber*  timeLen;//录音时长
 @property (nonatomic,retain) NSNumber*  isSend;//是否已送达

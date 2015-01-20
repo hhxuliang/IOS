@@ -12,7 +12,7 @@
 #import "XMPPStream.h"
 
 @implementation JXMessageObject
-@synthesize content,timeSend,fromUserId,toUserId,type,messageNo, messageId,timeReceive,fileName,fileData,fileSize,location_x,location_y,timeLen,isSend,isRead,progress,dictionary,index,isGroup;
+@synthesize content,timeSend,fromUserId,toUserId,type,messageNo, messageId,timeReceive,fileName,fileData,fileSize,location_x,location_y,timeLen,isSend,isRead,progress,dictionary,index,isGroup,serverdatekey;
 
 -(id)init{
     self = [super init];
@@ -51,6 +51,7 @@
     [isSend release];
     [isRead release];
     [timeLen release];
+    [serverdatekey release];
     [super dealloc];
 }
 
@@ -78,6 +79,7 @@
     self.isRead = [p objectForKey:kMESSAGE_ISREAD];
     self.timeLen = [p objectForKey:kMESSAGE_TIMELEN];
     self.fileSize = [p objectForKey:kMESSAGE_FILESIZE];
+    self.serverdatekey = [p objectForKey:kMESSAGE_SERVERDATEKEY];
     //    self. = [p objectForKey:kMESSAGE_];
     
     [f release];

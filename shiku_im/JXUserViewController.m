@@ -36,7 +36,7 @@
     _array =[[NSMutableArray alloc] init];
     _page=0;
     _isLoading=0;
-    [self find];
+    //[self find];
 }
 
 - (void)didReceiveMemoryWarning

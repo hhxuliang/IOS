@@ -47,7 +47,7 @@
 - (IBAction)sendIt:(id)sender;
 - (IBAction)shareMore:(id)sender;
 - (void)refresh;
-
+- (void)sendImagePath:(NSString *)PicPath;
 @property (nonatomic,retain) JXUserObject *chatPerson;
 @property (nonatomic,retain) NSString* roomName;
 @end

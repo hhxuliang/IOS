@@ -21,7 +21,7 @@
 #import "JXSelectImageView.h"
 #import "emojiViewController.h"
 #import "JXLoginViewController.h"
-
+#import "HttpFileOperation.h"
 #define height_Top   44
 #define height_Toolbar   49
 #define height_table JX_SCREEN_HEIGHT-height_Toolbar-height_Top-20
@@ -309,6 +309,35 @@
     }
     [messageText setText:nil];
 }
+-(void)sendImagePath:(NSString *)PicPath path:(NSString*)path
+{
+    if(![JXXMPP sharedInstance].isLogined){
+        JXLoginViewController* vc = [[JXLoginViewController alloc]init];
+        [g_App.window addSubview:vc.view];
+        return;
+    }
+    
+    
+    if (PicPath.length > 0) {
+        JXMessageObject *msg=[[JXMessageObject alloc]init];
+        msg.timeSend     = [NSDate date];
+        msg.fromUserId   = [[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_ID];
+        if([self.roomName length]>0)
+            msg.toUserId = self.roomName;
+        else
+            msg.toUserId     = _chatPerson.userId;
+        msg.content      = PicPath;
+        msg.fileName     = path;
+        msg.type         = [NSNumber numberWithInt:kWCMessageTypeImage];
+        msg.isSend       = [NSNumber numberWithBool:NO];
+        msg.isRead       = [NSNumber numberWithBool:YES];
+        msg.fileSize     = [NSNumber numberWithInt:0];
+        msg.timeLen      = [NSNumber numberWithInt:0];
+        
+        [[JXXMPP sharedInstance] sendMessage:msg roomName:roomName];//发送消息
+        [msg release];
+    }
+}
 
 
 -(void)sendImage:(UIImage *)aImage
@@ -549,12 +578,12 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage  * chosedImage=[[info objectForKey:@"UIImagePickerControllerOriginalImage"]retain];
-    
+    NSString * path = [[info objectForKey:@"UIImagePickerControllerReferenceURL"] absoluteString];
     
     [self dismissViewControllerAnimated:YES completion:^{
         //
+        [HttpFileOperation postFileByImage:chosedImage col:self path:path];
         
-        [self sendImage:chosedImage];
         
         
     }];

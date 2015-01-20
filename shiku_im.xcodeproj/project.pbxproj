@@ -10,7 +10,8 @@
 		2069541718439E69007F1FED /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2069541518439E69007F1FED /* AudioToolbox.framework */; };
 		2069541818439E69007F1FED /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2069541618439E69007F1FED /* AVFoundation.framework */; };
 		264955091A663A9600EAD70A /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 264955081A663A9600EAD70A /* AsyncSocket.m */; };
-		26A395021A6CE4DF007B7FDC /* UploadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A395011A6CE4DF007B7FDC /* UploadFile.m */; };
+		2675A80D1A6E2B80006A68BE /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2675A80C1A6E2B7F006A68BE /* AssetsLibrary.framework */; };
+		26A395021A6CE4DF007B7FDC /* HttpFileOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A395011A6CE4DF007B7FDC /* HttpFileOperation.m */; };
 		840016DD17BBB7870073EB8E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 840016DC17BBB7870073EB8E /* libsqlite3.dylib */; };
 		8409055A17B693CF00F5C28D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8409055917B693CF00F5C28D /* UIKit.framework */; };
 		8409055C17B693CF00F5C28D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8409055B17B693CF00F5C28D /* Foundation.framework */; };
@@ -466,8 +467,9 @@
 		2069541618439E69007F1FED /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		264955071A663A9600EAD70A /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
 		264955081A663A9600EAD70A /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
-		26A395011A6CE4DF007B7FDC /* UploadFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadFile.m; sourceTree = "<group>"; };
-		26A395031A6CE503007B7FDC /* UploadFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadFile.h; sourceTree = "<group>"; };
+		2675A80C1A6E2B7F006A68BE /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		26A395011A6CE4DF007B7FDC /* HttpFileOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpFileOperation.m; sourceTree = "<group>"; };
+		26A395031A6CE503007B7FDC /* HttpFileOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HttpFileOperation.h; sourceTree = "<group>"; };
 		840016DC17BBB7870073EB8E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		8409055617B693CF00F5C28D /* shiku_im.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shiku_im.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8409055917B693CF00F5C28D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1115,6 +1117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2675A80D1A6E2B80006A68BE /* AssetsLibrary.framework in Frameworks */,
 				CCE2415918FFB8EB00A3CB5A /* libopencore-amrnb.a in Frameworks */,
 				CCE2415A18FFB8EB00A3CB5A /* libopencore-amrwb.a in Frameworks */,
 				2069541718439E69007F1FED /* AudioToolbox.framework in Frameworks */,
@@ -1160,6 +1163,7 @@
 		8409055817B693CF00F5C28D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2675A80C1A6E2B7F006A68BE /* AssetsLibrary.framework */,
 				2069541518439E69007F1FED /* AudioToolbox.framework */,
 				2069541618439E69007F1FED /* AVFoundation.framework */,
 				840016DC17BBB7870073EB8E /* libsqlite3.dylib */,
@@ -1296,8 +1300,8 @@
 				CCC541491904C62800C02C86 /* JXRoomPool.m */,
 				CCE240DF18FFB8EB00A3CB5A /* JXXMPP.h */,
 				CCE240E018FFB8EB00A3CB5A /* JXXMPP.m */,
-				26A395011A6CE4DF007B7FDC /* UploadFile.m */,
-				26A395031A6CE503007B7FDC /* UploadFile.h */,
+				26A395011A6CE4DF007B7FDC /* HttpFileOperation.m */,
+				26A395031A6CE503007B7FDC /* HttpFileOperation.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2746,7 +2750,7 @@
 				CCE2423018FFB8EB00A3CB5A /* FMDatabasePool.m in Sources */,
 				CCE2416718FFB8EB00A3CB5A /* ASIHTTPRequest.m in Sources */,
 				CCE241E018FFB8EB00A3CB5A /* gifViewController.m in Sources */,
-				26A395021A6CE4DF007B7FDC /* UploadFile.m in Sources */,
+				26A395021A6CE4DF007B7FDC /* HttpFileOperation.m in Sources */,
 				CCE241EB18FFB8EB00A3CB5A /* XMPPProcessOne.m in Sources */,
 				CCE242EB18FFB8EB00A3CB5A /* ContextFilterLogFormatter.m in Sources */,
 				CCE242F618FFB8EB00A3CB5A /* LibIDN.m in Sources */,

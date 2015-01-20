@@ -193,12 +193,37 @@ static JXXMPP *sharedManager;
         //创建message对象
         [msg fromDictionary:msgjson];
             
+        
+        if(msg.type==kWCMessageTypeImage)
+        {
+            NSString * documentsDirectoryPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"picture"];
+            BOOL bo = [[NSFileManager defaultManager] createDirectoryAtPath:documentsDirectoryPath withIntermediateDirectories:YES attributes:nil error:nil];
+            NSAssert(bo,@"create file floder error!");
+            NSLog(@"保存路径:%@",documentsDirectoryPath);
+            //Get Image From URL
+            UIImage * imageFromURL = [self getImageFromURL:msg.content];
+            
+            NSRange range =[documentsDirectoryPath rangeOfString:@"/" options:NSBackwardsSearch];
+            NSString * filename = [NSString stringWithFormat:@"%@_UID_%@",msg.fromUserId,[msg.content substringFromIndex:range.location+1]];
+            
+            range =[documentsDirectoryPath rangeOfString:@"." options:NSBackwardsSearch];
+            NSString * filetype = [msg.content substringFromIndex:range.location+1];
+            
+            //Save Image to Directory
+            [self saveImage:imageFromURL withFileName:filename ofType:filetype inDirectory:documentsDirectoryPath];
+            msg.fileName = [documentsDirectoryPath stringByAppendingPathComponent:filename];
+            
+            
+            //如何获取下载的文件的完整路径?
+        }
         if(msg.type != nil ){
             //if([type isEqualToString:@"chat"]){
-                [msg save];
+            [msg save];
+            NSString *ack_format=@"{\"TranObjectType\":16,\"fromUser\":%@,\"toUser\":0,\"crowd\":0,\"fromusername\":\"null\",\"fromimg\":0,\"TranObject\":{\"arg1\":\"%@\",\"arg2\":\"%@\",\"arg3\":\"\"}}";
+            NSString * ack = [NSString stringWithFormat:ack_format,msg.toUserId,msg.serverdatekey,msg.toUserId];
+            [self sendMsg:ack];
             //}
         }
-        
         if([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive)
         {
             // We are not active, so use a local notification instead

@@ -9,8 +9,10 @@
 #import "JXEmoji.h"
 #import "SCGIFImageView.h"
 #import "JXImageView.h"
-
-
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <AssetsLibrary/ALAsset.h>
+#import <AssetsLibrary/ALAssetsGroup.h>
+#import <AssetsLibrary/ALAssetRepresentation.h>
 
 #define CELL_HEIGHT self.contentView.frame.size.height
 #define CELL_WIDTH self.contentView.frame.size.width
@@ -230,7 +232,27 @@
             [_chatImage setFrame:CGRectMake(2*INSETS+HEAD_SIZE+15, INSETS*2,100,100)];
             _bubbleBg.frame=CGRectMake(_chatImage.frame.origin.x-15, INSETS, 100+30, 100+30);
         }
-        [self setChatImage:[UIImage imageWithData:msg.fileData]];
+        
+        if([msg.fileName length] >0)
+        {
+            ALAssetsLibrary   *lib = [[[ALAssetsLibrary alloc] init] autorelease];
+            [lib assetForURL:[NSURL URLWithString:msg.fileName] resultBlock:^(ALAsset *asset)
+            {
+                //在这里使用asset来获取图片
+                ALAssetRepresentation *assetRep = [asset defaultRepresentation];
+                CGImageRef imgRef = [assetRep fullResolutionImage];
+                UIImage *img = [UIImage imageWithCGImage:imgRef
+                                                   scale:assetRep.scale
+                                             orientation:(UIImageOrientation)assetRep.orientation];
+                [self setChatImage:img];
+            }
+            failureBlock:^(NSError *error)
+            {}
+            ];
+            
+        }
+    
+        
     }
     
     
