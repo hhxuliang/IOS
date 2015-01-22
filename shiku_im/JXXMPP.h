@@ -13,8 +13,8 @@
 #define SRV_CONNECTED 0
 #define SRV_CONNECT_SUC 1
 #define SRV_CONNECT_FAIL 2
-#define HOST_IP @"192.168.8.1"
-#define HOST_PORT 8001
+#define HOST_IP @"115.159.71.239"
+#define HOST_PORT 80
 
 @class JXMessageObject;
 @class JXRoomPool;
@@ -51,7 +51,7 @@
 
 - (int) connectServer: (NSString *) hostIP port:(int) hostPort;
 - (void) showMessage:(NSString *) msg;
-- (void) sendMsg;
+- (void) sendMsg:(NSString *) inputMsgStr;
 - (void) reConnect;
 
 

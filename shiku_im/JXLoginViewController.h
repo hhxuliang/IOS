@@ -12,5 +12,5 @@
     UITextField* _user;
     UITextField* _pwd;
 }
-
+-(void)loginSuccess:(NSString*)response;
 @end

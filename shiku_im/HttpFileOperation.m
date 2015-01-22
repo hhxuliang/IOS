@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "HttpFileOperation.h"
 #import "JXChatViewController.h"
-#define UPLOAD_URL @"http://192.168.8.1:8080/Server/UploadFile"//上传地址
+#define UPLOAD_URL @"http://115.159.71.239:8080/Server/UploadFile"//上传地址
 @implementation HttpFileOperation
 
 +(void) postFileByImage:(UIImage*)img col:(JXChatViewController*)col path:(NSString*)path{
@@ -85,14 +85,17 @@
 
 
 +(void) saveImage:(UIImage *)image withFileName:(NSString *)imageName ofType:(NSString *)extension inDirectory:(NSString *)directoryPath {
+    BOOL success=YES;
     if ([[extension lowercaseString] isEqualToString:@"png"]) {
-        [UIImagePNGRepresentation(image) writeToFile:[directoryPath stringByAppendingPathComponent:imageName] options:NSAtomicWrite error:nil];
+        success = [UIImagePNGRepresentation(image) writeToFile:[directoryPath stringByAppendingPathComponent:imageName] options:NSAtomicWrite error:nil];
     } else if ([[extension lowercaseString] isEqualToString:@"jpg"] || [[extension lowercaseString] isEqualToString:@"jpeg"]) {
-        [UIImageJPEGRepresentation(image, 1.0) writeToFile:[directoryPath stringByAppendingPathComponent:imageName] options:NSAtomicWrite error:nil];
+        success = [UIImageJPEGRepresentation(image, 1.0) writeToFile:[directoryPath stringByAppendingPathComponent:imageName] options:NSAtomicWrite error:nil];
     } else {
         //ALog(@"Image Save Failed\nExtension: (%@) is not recognized, use (PNG/JPG)", extension);
         NSLog(@"文件后缀不认识");
     }
+    if (success == NO)
+        NSLog(@"save file error");
 }
 
 

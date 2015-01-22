@@ -235,24 +235,32 @@
         
         if([msg.fileName length] >0)
         {
-            ALAssetsLibrary   *lib = [[[ALAssetsLibrary alloc] init] autorelease];
-            [lib assetForURL:[NSURL URLWithString:msg.fileName] resultBlock:^(ALAsset *asset)
-            {
-                //在这里使用asset来获取图片
-                ALAssetRepresentation *assetRep = [asset defaultRepresentation];
-                CGImageRef imgRef = [assetRep fullResolutionImage];
-                UIImage *img = [UIImage imageWithCGImage:imgRef
-                                                   scale:assetRep.scale
-                                             orientation:(UIImageOrientation)assetRep.orientation];
-                [self setChatImage:img];
+            if([msg.fileName hasPrefix:@"assets-library"]){
+                ALAssetsLibrary   *lib = [[[ALAssetsLibrary alloc] init] autorelease];
+                [lib assetForURL:[NSURL URLWithString:msg.fileName] resultBlock:^(ALAsset *asset)
+                 {
+                     //在这里使用asset来获取图片
+                     ALAssetRepresentation *assetRep = [asset defaultRepresentation];
+                     CGImageRef imgRef = [assetRep fullResolutionImage];
+                     UIImage *img = [UIImage imageWithCGImage:imgRef
+                                                        scale:assetRep.scale
+                                                  orientation:(UIImageOrientation)assetRep.orientation];
+                     [self setChatImage:img];
+                 }
+                 failureBlock:^(NSError *error)
+                 {}
+                 ];
             }
-            failureBlock:^(NSError *error)
-            {}
-            ];
-            
+            else{
+                NSFileManager * fileManager= [NSFileManager defaultManager];
+                NSString * documentsDirectoryPath = [[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"picture"] stringByAppendingPathComponent:@"/"];
+                if([fileManager fileExistsAtPath:[documentsDirectoryPath stringByAppendingPathComponent:msg.fileName]])
+                {
+                    UIImage* img = [UIImage imageWithContentsOfFile:[documentsDirectoryPath stringByAppendingPathComponent:msg.fileName]];
+                    [self setChatImage:img];
+                }
+            }
         }
-    
-        
     }
     
     

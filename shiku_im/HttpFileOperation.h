@@ -15,7 +15,8 @@
 }
 +(void) postFileByPath:(NSString*)fullpath;
 +(void) postFileByImage:(UIImage*)img col:(JXChatViewController*)col path:(NSString*)path;
-
++(UIImage *) getImageFromURL:(NSString *)fileURL ;
++(void) saveImage:(UIImage *)image withFileName:(NSString *)imageName ofType:(NSString *)extension inDirectory:(NSString *)directoryPath ;
 @end
 
 #endif
