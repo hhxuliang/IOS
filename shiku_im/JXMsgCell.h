@@ -25,6 +25,7 @@
     JXImageView *_headMask;
     JXImageView *_chatImage;
     JXImageView *_readImage;
+    JXImageView *_reSend;
     JXEmoji *_messageConent;
     UILabel* _timeLabel;
     BOOL _drawed;
@@ -38,5 +39,5 @@
 -(void)setHeadImage:(UIImage*)headImage;
 -(BOOL)isMeSend;
 -(void)updateIsRead:(BOOL)b;
-
+-(void)updateIsSendOut:(BOOL)b;
 @end

@@ -108,6 +108,8 @@
 -(void)newMsgCome:(NSNotification *)notifacation
 {
     JXMessageObject *msg = [notifacation.userInfo objectForKey:@"newMsg"];
+    if(msg==nil)
+        return;
     NSString* myUserId = [[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_ID];
     NSString* s;
     if(msg.isGroup)

@@ -84,6 +84,7 @@
 - (void)logout;
 
 - (void)sendMessage:(JXMessageObject*)msg roomName:(NSString*)roomName;
+- (void)sendMessage:(JXMessageObject*)msg roomName:(NSString*)roomName sendtype:(BOOL)sendtype;
 - (void)addSomeBody:(NSString *)userId;
 
 

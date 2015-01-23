@@ -24,7 +24,9 @@
 #define kMESSAGE_ISSEND @"isSend"
 #define kMESSAGE_ISREAD @"isRead"
 #define kMESSAGE_FILESIZE @"fileSize"
+#define kMESSAGE_RESEND @"resend"
 #define kMESSAGE_SERVERDATEKEY @"serverdatekey"
+#define kMESSAGE_DATEKEY @"datekey"
 //#define kMESSAGE_ @""
 //#define kMESSAGE_ @""
 
@@ -47,6 +49,7 @@ enum kWCMessageType {
 @property (nonatomic,retain) NSString*  content;//内容
 @property (nonatomic,retain) NSString*  fileName;//文件名
 @property (nonatomic,retain) NSString*  serverdatekey;
+@property (nonatomic,retain) NSString*  datekey;
 @property (nonatomic,retain) NSNumber*  fileSize;//文件尺寸
 @property (nonatomic,retain) NSNumber*  timeLen;//录音时长
 @property (nonatomic,retain) NSNumber*  isSend;//是否已送达
@@ -57,6 +60,7 @@ enum kWCMessageType {
 @property (nonatomic,retain) NSDate*    timeReceive;//收到的时间
 @property (nonatomic,retain) NSData*    fileData;//文件内容
 @property (nonatomic,assign) BOOL       isGroup;//是否群聊
+@property (nonatomic,assign) BOOL       reSend;
 
 @property (nonatomic,retain) NSMutableDictionary*  dictionary;
 @property (nonatomic,assign) float      progress;
@@ -76,7 +80,7 @@ enum kWCMessageType {
 +(BOOL)deleteMessageById:(NSNumber*)aMessageNo;
 +(BOOL)merge:(JXMessageObject*)aMessage;
 +(BOOL)updateNewMsgsTo0:(NSString*)tableName;
-
++(BOOL)updateMsgSendOut:(NSString*)toUid datekey:(NSString*) datekey;
 //获取某联系人聊天记录
 +(NSMutableArray *)fetchMessageListWithUser:(NSString *)userId byPage:(int)pageIndex;
 

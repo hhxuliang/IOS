@@ -12,7 +12,7 @@
 #import "XMPPStream.h"
 
 @implementation JXMessageObject
-@synthesize content,timeSend,fromUserId,toUserId,type,messageNo, messageId,timeReceive,fileName,fileData,fileSize,location_x,location_y,timeLen,isSend,isRead,progress,dictionary,index,isGroup,serverdatekey;
+@synthesize content,timeSend,fromUserId,toUserId,type,messageNo, messageId,timeReceive,fileName,fileData,fileSize,location_x,location_y,timeLen,isSend,isRead,progress,dictionary,index,isGroup,reSend,serverdatekey,datekey;
 
 -(id)init{
     self = [super init];
@@ -26,6 +26,7 @@
         self.location_x = [NSNumber numberWithInt:0];
         self.location_y = [NSNumber numberWithInt:0];
         self.timeLen    = [NSNumber numberWithInt:0];
+        reSend = NO;
         isGroup = NO;
     }
     return self;
@@ -52,6 +53,7 @@
     [isRead release];
     [timeLen release];
     [serverdatekey release];
+    [datekey release];
     [super dealloc];
 }
 
@@ -80,6 +82,7 @@
     self.timeLen = [p objectForKey:kMESSAGE_TIMELEN];
     self.fileSize = [p objectForKey:kMESSAGE_FILESIZE];
     self.serverdatekey = [p objectForKey:kMESSAGE_SERVERDATEKEY];
+    self.datekey = [p objectForKey:kMESSAGE_DATEKEY];
     //    self. = [p objectForKey:kMESSAGE_];
     
     [f release];
@@ -104,7 +107,7 @@
     [dictionary setValue:location_x forKey:kMESSAGE_LOCATION_X];
     [dictionary setValue:location_y forKey:kMESSAGE_LOCATION_Y];
     [dictionary setValue:timeLen forKey:kMESSAGE_TIMELEN];
-//    [dictionary setValue:messageNo forKey:kMESSAGE_No];
+    [dictionary setValue:datekey forKey:kMESSAGE_DATEKEY];
 //    [dictionary setValue:isRead forKey:kMESSAGE_ISSEND];
 //    [dictionary setValue:isSend forKey:kMESSAGE_ISREAD];
     //    [dictionary setValue: forKey:kMESSAGE_];
@@ -142,16 +145,16 @@
         return NO;
     FMDatabase* db = [[JXXMPP sharedInstance] openUserDb:dbName];
     
-    NSString *createStr=[NSString stringWithFormat:@"CREATE  TABLE IF NOT EXISTS 'msg_%@' ('messageNo' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL  UNIQUE , 'fromUserId' VARCHAR, 'toUserId' VARCHAR, 'content' VARCHAR, 'timeSend' DATETIME,'timeReceive' DATETIME,'type' INTEGER, 'messageId' VARCHAR, 'fileData' VARCHAR, 'fileName' VARCHAR,'fileSize' INTEGER,'location_x' INTEGER,'location_y' INTEGER,'timeLen' INTEGER,'isRead' INTEGER,'isSend' INTEGER )",tableName];
-    
+    NSString *createStr=[NSString stringWithFormat:@"CREATE  TABLE IF NOT EXISTS 'msg_%@' ('messageNo' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL  UNIQUE , 'fromUserId' VARCHAR, 'toUserId' VARCHAR, 'content' VARCHAR, 'timeSend' DATETIME,'timeReceive' DATETIME,'type' INTEGER, 'messageId' VARCHAR, 'fileData' VARCHAR, 'fileName' VARCHAR,'fileSize' INTEGER,'location_x' INTEGER,'location_y' INTEGER,'timeLen' INTEGER,'isRead' INTEGER,'isSend' INTEGER,'resend' INTEGER ,'datekey' VARCHAR)",tableName];
+    //BOOL worked = [db executeUpdate:[NSString stringWithFormat:@"drop table if exists msg_%@" , tableName]];
     BOOL worked = [db executeUpdate:createStr];
 //    FMDBQuickCheck(worked);
 
     if([self.messageId length]>0)
         self.messageId = [XMPPStream generateUUID];
     
-    NSString *insertStr=[NSString stringWithFormat:@"INSERT INTO msg_%@ (fromUserId,toUserId,content,type,messageId,timeSend,timeReceive,fileData,fileName,fileSize,location_x,location_y,timeLen,isRead,isSend) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",tableName];
-    worked = [db executeUpdate:insertStr,self.fromUserId,self.toUserId,self.content,self.type,self.messageId,self.timeSend,self.timeReceive,[self.fileData base64Encoded],self.fileName,self.fileSize,self.location_x,self.location_y,self.timeLen,self.isRead,self.isSend];
+    NSString *insertStr=[NSString stringWithFormat:@"INSERT INTO msg_%@ (fromUserId,toUserId,content,type,messageId,timeSend,timeReceive,fileData,fileName,fileSize,location_x,location_y,timeLen,isRead,isSend,resend,datekey) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",tableName];
+    worked = [db executeUpdate:insertStr,self.fromUserId,self.toUserId,self.content,self.type,self.messageId,self.timeSend,self.timeReceive,[self.fileData base64Encoded],self.fileName,self.fileSize,self.location_x,self.location_y,self.timeLen,self.isRead,self.isSend,[NSNumber numberWithInt:1] ,self.datekey];
 //    FMDBQuickCheck(worked);
     
     NSString* s=[self getLastContent];
@@ -224,6 +227,11 @@
     p.isRead = [rs objectForColumnName:kMESSAGE_ISREAD];
     p.timeLen = [rs objectForColumnName:kMESSAGE_TIMELEN];
     p.fileSize = [rs objectForColumnName:kMESSAGE_FILESIZE];
+    p.datekey = [rs stringForColumn:kMESSAGE_DATEKEY];
+    if([rs intForColumn:kMESSAGE_RESEND]==1)
+        p.reSend = NO;
+    else
+        p.reSend = YES;
 }
 
 //获取某联系人聊天记录
@@ -300,5 +308,17 @@
     BOOL worked=[db executeUpdate:[NSString stringWithFormat:@"update friend set newMsgs=0 where userId=?"],tableName];
     return worked;
 }
-
++(BOOL)updateMsgSendOut:(NSString*)toUid datekey:(NSString*) datekey
+{
+    NSString* sql= [NSString stringWithFormat:@"update msg_%@ set resend=0 where datekey=?",toUid];
+    NSString* dbName = [[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_ID];
+    FMDatabase* db = [[JXXMPP sharedInstance] openUserDb:dbName];
+    BOOL worked=[db executeUpdate:sql,datekey];
+    db=nil;
+    
+    NSDictionary *msg=[NSDictionary dictionaryWithObjectsAndKeys:toUid,@"toUid",datekey,@"datekey",nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:kXMPPNewMsgNotifaction object:nil userInfo:[NSDictionary dictionaryWithObject:msg forKey:@"MsgSendOut"]];
+    //[msg release];
+    return worked;
+}
 @end

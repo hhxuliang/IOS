@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2069541718439E69007F1FED /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2069541518439E69007F1FED /* AudioToolbox.framework */; };
 		2069541818439E69007F1FED /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2069541618439E69007F1FED /* AVFoundation.framework */; };
+		260E1C361A71130300D4EDDE /* agt.png in Resources */ = {isa = PBXBuildFile; fileRef = 260E1C351A71130300D4EDDE /* agt.png */; };
 		264955091A663A9600EAD70A /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 264955081A663A9600EAD70A /* AsyncSocket.m */; };
 		2675A80D1A6E2B80006A68BE /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2675A80C1A6E2B7F006A68BE /* AssetsLibrary.framework */; };
 		26A395021A6CE4DF007B7FDC /* HttpFileOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A395011A6CE4DF007B7FDC /* HttpFileOperation.m */; };
@@ -465,6 +466,7 @@
 /* Begin PBXFileReference section */
 		2069541518439E69007F1FED /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2069541618439E69007F1FED /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		260E1C351A71130300D4EDDE /* agt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agt.png; sourceTree = "<group>"; };
 		264955071A663A9600EAD70A /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
 		264955081A663A9600EAD70A /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
 		2675A80C1A6E2B7F006A68BE /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -2152,6 +2154,7 @@
 		CCE2405A18FFB8EB00A3CB5A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				260E1C351A71130300D4EDDE /* agt.png */,
 				CC4991B318FFDA9B000C07CD /* keyboard_n@2x.png */,
 				CC4991B418FFDA9B000C07CD /* face_n@2x.png */,
 				CC4991B518FFDA9B000C07CD /* new_top@2x.png */,
@@ -2505,6 +2508,7 @@
 				CCE2425918FFB8EB00A3CB5A /* 花心.gif in Resources */,
 				CCE2417618FFB8EB00A3CB5A /* default@2x.png in Resources */,
 				CCE2419518FFB8EB00A3CB5A /* f023.png in Resources */,
+				260E1C361A71130300D4EDDE /* agt.png in Resources */,
 				CCE2423818FFB8EB00A3CB5A /* ok手势.gif in Resources */,
 				CCE2426218FFB8EB00A3CB5A /* 0_mid_c@2x.png in Resources */,
 				CCE242AE18FFB8EB00A3CB5A /* tabbar_meHL.png in Resources */,

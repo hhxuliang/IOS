@@ -31,6 +31,7 @@
         _userHead =[[JXImageView alloc]initWithFrame:CGRectZero];
         _headMask =[[JXImageView alloc]initWithFrame:CGRectZero];
         _chatImage=[[JXImageView alloc]initWithFrame:CGRectZero];
+        _reSend=[[JXImageView alloc]initWithFrame:CGRectZero];
         
         _bubbleBg =[UIButton buttonWithType:UIButtonTypeCustom];
         
@@ -52,16 +53,19 @@
         [self.contentView addSubview:_headMask];
         [self.contentView addSubview:_messageConent];
         [self.contentView addSubview:_chatImage];
+        [self.contentView addSubview:_reSend];
         [self.contentView addSubview:_timeLabel];
         
         _messageConent.hidden = YES;
         [_chatImage setHidden:YES];
+        [_reSend setHidden:YES];
         [_messageConent setHidden:YES];
         
         [_chatImage setBackgroundColor:[UIColor redColor]];
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
         [_headMask setImage:[[UIImage imageNamed:@"UserHeaderImageBox"]stretchableImageWithLeftCapWidth:10 topCapHeight:10]];
         [_userHead setImage:[UIImage imageNamed:@"3.jpeg"]];
+        [_reSend setImage:[UIImage imageNamed:@"agt.png"]];
         
     }
     return self;
@@ -74,6 +78,7 @@
     [_userHead release];
     [_headMask release];
     [_chatImage release];
+    [_reSend release];
     [_messageConent release];
     [_timeLabel release];
     [super release];
@@ -126,6 +131,7 @@
     _messageConent.tag= index;
     _headMask.tag = index;
     _chatImage.tag = index;
+    _reSend.tag = index;
     _messageConent.tag = index;
 }
 
@@ -136,6 +142,7 @@
     _messageConent.delegate= value;
     _headMask.delegate = value;
     _chatImage.delegate = value;
+    _reSend.delegate = value;
     _messageConent.delegate = value;
     if(delegate && didTouch)
         [_bubbleBg addTarget:delegate action:didTouch forControlEvents:UIControlEventTouchUpInside];
@@ -147,11 +154,15 @@
     _messageConent.didTouch= value;
     _headMask.didTouch = value;
     _chatImage.didTouch = value;
+    _reSend.didTouch = value;
     _messageConent.didTouch = value;
     if(delegate && didTouch)
         [_bubbleBg addTarget:delegate action:didTouch forControlEvents:UIControlEventTouchUpInside];
 }
-
+-(void)updateIsSendOut:(BOOL)b
+{
+    _reSend.hidden = b;
+}
 -(void)updateIsRead:(BOOL)b{
     if(b)
         _readImage.hidden = YES;
@@ -169,7 +180,10 @@
         [self.contentView addSubview:_readImage];
     }
 }
-
+-(void)onClickImage
+{
+    [[JXXMPP sharedInstance] sendMessage:msg roomName:nil sendtype:NO];//发送消息
+}
 -(void)draw{
     if(_drawed)
         return;
@@ -209,6 +223,11 @@
         if(isMe){
             [_messageConent setHidden:NO];
             [_messageConent setFrame:CGRectMake(CELL_WIDTH-INSETS*2-HEAD_SIZE-textSize.width-15, (CELL_HEIGHT-textSize.height)/2, textSize.width, textSize.height)];
+            [_reSend  setFrame:CGRectMake(CELL_WIDTH-INSETS*2-HEAD_SIZE-textSize.width-45, (CELL_HEIGHT-textSize.height)/2, 15,15)];
+            _reSend.userInteractionEnabled=YES;
+            UITapGestureRecognizer * singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickImage)];
+            [_reSend addGestureRecognizer:singleTap];
+            [singleTap release];
             _bubbleBg.frame=CGRectMake(_messageConent.frame.origin.x-15, _messageConent.frame.origin.y-12, textSize.width+30, textSize.height+30);
         }else
         {
@@ -217,13 +236,19 @@
             _bubbleBg.frame=CGRectMake(_messageConent.frame.origin.x-15, _messageConent.frame.origin.y-12, textSize.width+30, textSize.height+30);
         }
     }
-    
-    
+
+    [_reSend setHidden:msg.reSend];
+
     if([msg.type intValue]==kWCMessageTypeImage){
         if(isMe)
         {
             [_chatImage setHidden:NO];
             [_chatImage setFrame:CGRectMake(CELL_WIDTH-INSETS*2-HEAD_SIZE-110, INSETS*2, 100, 100)];
+            [_reSend  setFrame:CGRectMake(CELL_WIDTH-INSETS*2-HEAD_SIZE-135, INSETS*2, 15, 15)];
+            _reSend.userInteractionEnabled=YES;
+            UITapGestureRecognizer * singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickImage)];
+            [_reSend addGestureRecognizer:singleTap];
+            [singleTap release];
             _bubbleBg.frame=CGRectMake(_chatImage.frame.origin.x-15, INSETS, 100+30, 100+30);
         }
         else

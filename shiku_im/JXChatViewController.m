@@ -543,7 +543,7 @@
     [self.tabBarController.tabBarItem setBadgeValue:@"1"];
     JXMessageObject *msg = [notifacation.userInfo objectForKey:@"newMsg"];
 
-    if([msg.fromUserId isEqualToString:_chatPerson.userId] || [msg.toUserId isEqualToString:_chatPerson.userId] || [msg.toUserId isEqualToString:self.roomName] ){
+    if(msg!=nil && ([msg.fromUserId isEqualToString:_chatPerson.userId] || [msg.toUserId isEqualToString:_chatPerson.userId] || [msg.toUserId isEqualToString:self.roomName] )){
         NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
         [_array addObject:msg];
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[_array count]-1 inSection:0];
@@ -553,6 +553,24 @@
         [_table endUpdates];
         [indexPaths release];
         [_table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_array.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    msg = nil;
+    NSDictionary * msgd = [notifacation.userInfo objectForKey:@"MsgSendOut"];
+    
+    if(msgd!=nil && ([[msgd objectForKey:@"toUid"] isEqualToString:_chatPerson.userId] || [[msgd objectForKey:@"toUid"] isEqualToString:_chatPerson.userId]))
+    {
+    JXMessageObject *unionObj=nil;
+    for(int i=[_array count]-1;i>=0;i--){
+        unionObj=[_array objectAtIndex:i];
+            if([[msgd objectForKey:@"datekey"] isEqualToString:unionObj.datekey])
+            {
+                NSIndexPath* index=[NSIndexPath indexPathForRow:i inSection:0];
+                JXMsgCell* cell = (JXMsgCell*)[_table cellForRowAtIndexPath:index];
+                [cell updateIsSendOut:YES];
+                break;
+            }
+        unionObj = nil;
+    }
     }
     
     msg = nil;

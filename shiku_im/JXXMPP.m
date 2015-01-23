@@ -186,6 +186,12 @@ static JXXMPP *sharedManager;
     if (TranObjectType ==1) {
         [g_App.loginVC loginSuccess:msg];
     }
+    if (TranObjectType ==16) {
+        NSDictionary *msgjson=[rootDic objectForKey:@"TranObject"];
+        NSString* touid = [msgjson objectForKey:@"arg2"];
+        NSString* datekey = [msgjson objectForKey:@"arg1"];
+        [JXMessageObject updateMsgSendOut:touid datekey:datekey];
+    }
     if(TranObjectType==5){
         NSDictionary *msgjson=[rootDic objectForKey:@"TranObject"];
 
@@ -296,17 +302,31 @@ static JXXMPP *sharedManager;
 #pragma  mark ------收发消息-------
 - (void)sendMessage:(JXMessageObject*)msg roomName:(NSString*)roomName
 {
+    [self sendMessage:msg roomName:roomName sendtype:YES];
+}
+
+- (void)sendMessage:(JXMessageObject*)msg roomName:(NSString*)roomName sendtype:(BOOL)sendtype
+{
 	//采用SBjson将params转化为json格式的字符串
-	SBJsonWriter * OderJsonwriter = [SBJsonWriter new];
+    if(sendtype){
+        NSDateFormatter * f=[[NSDateFormatter alloc] init];
+        [f  setDateFormat:@"YYYY-MM-dd hh:mm:ss:SSS"];
+        msg.datekey = [f stringFromDate:[NSDate date]];
+        [f release];
+    }
+    SBJsonWriter * OderJsonwriter = [SBJsonWriter new];
 	NSString * jsonString = [OderJsonwriter stringWithObject:[msg toDictionary]];
 	[OderJsonwriter release];
     
-    if(roomName == nil)
-        [msg save];
-    else
+    if(roomName == nil){
+        if (sendtype) {
+            [msg save];
+        }
+    }
+    else{
         msg.isGroup = YES;
 //        [msg saveRoomMsg:roomName];
-    
+    }
     XMPPMessage *aMessage;
     if(roomName == nil)
         aMessage=[XMPPMessage messageWithType:@"chat" to:[XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@",msg.toUserId,kXMPP_Domain]]];
