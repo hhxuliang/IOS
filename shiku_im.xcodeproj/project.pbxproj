@@ -13,6 +13,14 @@
 		264955091A663A9600EAD70A /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 264955081A663A9600EAD70A /* AsyncSocket.m */; };
 		2675A80D1A6E2B80006A68BE /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2675A80C1A6E2B7F006A68BE /* AssetsLibrary.framework */; };
 		26A395021A6CE4DF007B7FDC /* HttpFileOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A395011A6CE4DF007B7FDC /* HttpFileOperation.m */; };
+		26FD3C861A71F9DA00DDB0F7 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FD3C841A71F9DA00DDB0F7 /* RootViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		26FD3C871A71F9DA00DDB0F7 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26FD3C851A71F9DA00DDB0F7 /* RootViewController.xib */; };
+		26FD3C8B1A71FA3600DDB0F7 /* UserAlbumListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FD3C8A1A71FA3600DDB0F7 /* UserAlbumListView.m */; };
+		26FD3C921A71FA4C00DDB0F7 /* AlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FD3C8D1A71FA4C00DDB0F7 /* AlbumCell.m */; };
+		26FD3C931A71FA4C00DDB0F7 /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26FD3C8E1A71FA4C00DDB0F7 /* AlbumCell.xib */; };
+		26FD3C941A71FA4C00DDB0F7 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FD3C901A71FA4C00DDB0F7 /* PhotoCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		26FD3C951A71FA4C00DDB0F7 /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26FD3C911A71FA4C00DDB0F7 /* PhotoCell.xib */; };
+		26FD3C981A71FA6200DDB0F7 /* AlbumPhotosListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FD3C971A71FA6200DDB0F7 /* AlbumPhotosListView.m */; };
 		840016DD17BBB7870073EB8E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 840016DC17BBB7870073EB8E /* libsqlite3.dylib */; };
 		8409055A17B693CF00F5C28D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8409055917B693CF00F5C28D /* UIKit.framework */; };
 		8409055C17B693CF00F5C28D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8409055B17B693CF00F5C28D /* Foundation.framework */; };
@@ -472,6 +480,19 @@
 		2675A80C1A6E2B7F006A68BE /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		26A395011A6CE4DF007B7FDC /* HttpFileOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpFileOperation.m; sourceTree = "<group>"; };
 		26A395031A6CE503007B7FDC /* HttpFileOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HttpFileOperation.h; sourceTree = "<group>"; };
+		26FD3C831A71F9DA00DDB0F7 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		26FD3C841A71F9DA00DDB0F7 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		26FD3C851A71F9DA00DDB0F7 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		26FD3C891A71FA3600DDB0F7 /* UserAlbumListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAlbumListView.h; sourceTree = "<group>"; };
+		26FD3C8A1A71FA3600DDB0F7 /* UserAlbumListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAlbumListView.m; sourceTree = "<group>"; };
+		26FD3C8C1A71FA4C00DDB0F7 /* AlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCell.h; sourceTree = "<group>"; };
+		26FD3C8D1A71FA4C00DDB0F7 /* AlbumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCell.m; sourceTree = "<group>"; };
+		26FD3C8E1A71FA4C00DDB0F7 /* AlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumCell.xib; sourceTree = "<group>"; };
+		26FD3C8F1A71FA4C00DDB0F7 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
+		26FD3C901A71FA4C00DDB0F7 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
+		26FD3C911A71FA4C00DDB0F7 /* PhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
+		26FD3C961A71FA6200DDB0F7 /* AlbumPhotosListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumPhotosListView.h; sourceTree = "<group>"; };
+		26FD3C971A71FA6200DDB0F7 /* AlbumPhotosListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumPhotosListView.m; sourceTree = "<group>"; };
 		840016DC17BBB7870073EB8E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		8409055617B693CF00F5C28D /* shiku_im.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shiku_im.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8409055917B693CF00F5C28D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1145,6 +1166,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26FD3C881A71FA0200DDB0F7 /* ShowAllPicture */ = {
+			isa = PBXGroup;
+			children = (
+				26FD3C891A71FA3600DDB0F7 /* UserAlbumListView.h */,
+				26FD3C8A1A71FA3600DDB0F7 /* UserAlbumListView.m */,
+				26FD3C961A71FA6200DDB0F7 /* AlbumPhotosListView.h */,
+				26FD3C971A71FA6200DDB0F7 /* AlbumPhotosListView.m */,
+			);
+			name = ShowAllPicture;
+			sourceTree = "<group>";
+		};
 		8409054D17B693CF00F5C28D = {
 			isa = PBXGroup;
 			children = (
@@ -1283,6 +1315,9 @@
 				CCE240DE18FFB8EB00A3CB5A /* JXUserViewController.m */,
 				CCE240E418FFB8EB00A3CB5A /* PullRefreshTableViewController.h */,
 				CCE240E518FFB8EB00A3CB5A /* PullRefreshTableViewController.m */,
+				26FD3C831A71F9DA00DDB0F7 /* RootViewController.h */,
+				26FD3C841A71F9DA00DDB0F7 /* RootViewController.m */,
+				26FD3C851A71F9DA00DDB0F7 /* RootViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1311,6 +1346,12 @@
 		CC4991B218FFD9CF000C07CD /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				26FD3C8C1A71FA4C00DDB0F7 /* AlbumCell.h */,
+				26FD3C8D1A71FA4C00DDB0F7 /* AlbumCell.m */,
+				26FD3C8E1A71FA4C00DDB0F7 /* AlbumCell.xib */,
+				26FD3C8F1A71FA4C00DDB0F7 /* PhotoCell.h */,
+				26FD3C901A71FA4C00DDB0F7 /* PhotoCell.m */,
+				26FD3C911A71FA4C00DDB0F7 /* PhotoCell.xib */,
 				CCE240BE18FFB8EB00A3CB5A /* JXCell.h */,
 				CCE240BF18FFB8EB00A3CB5A /* JXCell.m */,
 				CCE240D118FFB8EB00A3CB5A /* JXMsgCell.h */,
@@ -1322,6 +1363,7 @@
 		CCE23E8C18FFB8EA00A3CB5A /* shiku_im */ = {
 			isa = PBXGroup;
 			children = (
+				26FD3C881A71FA0200DDB0F7 /* ShowAllPicture */,
 				CC4991B018FFD992000C07CD /* Controller */,
 				CC4991B218FFD9CF000C07CD /* Cell */,
 				CC4991B118FFD9B3000C07CD /* Model */,
@@ -2493,6 +2535,7 @@
 				CCE241C218FFB8EB00A3CB5A /* f068.png in Resources */,
 				CCE2426C18FFB8EB00A3CB5A /* DeleteEmoticonBtnHL@2x.png in Resources */,
 				CCE242A518FFB8EB00A3CB5A /* tabbar_discover@2x.png in Resources */,
+				26FD3C951A71FA4C00DDB0F7 /* PhotoCell.xib in Resources */,
 				CCE241AF18FFB8EB00A3CB5A /* f049.png in Resources */,
 				CCE2418918FFB8EB00A3CB5A /* f011.png in Resources */,
 				CCE2425818FFB8EB00A3CB5A /* 睡觉.gif in Resources */,
@@ -2533,6 +2576,7 @@
 				CCE2428418FFB8EB00A3CB5A /* icon.png in Resources */,
 				CCE2429C18FFB8EB00A3CB5A /* sharemore_voipvoice@2x.png in Resources */,
 				CCE2418618FFB8EB00A3CB5A /* f008.png in Resources */,
+				26FD3C871A71F9DA00DDB0F7 /* RootViewController.xib in Resources */,
 				CCE242C618FFB8EB00A3CB5A /* JXEmptyViewController.xib in Resources */,
 				CCE241A318FFB8EB00A3CB5A /* f037.png in Resources */,
 				CCE242C218FFB8EB00A3CB5A /* VOIPSenderVoiceNodeBkgHL@2x.png in Resources */,
@@ -2630,6 +2674,7 @@
 				CCE2424F18FFB8EB00A3CB5A /* 思考.gif in Resources */,
 				CCE241D818FFB8EB00A3CB5A /* f090.png in Resources */,
 				CCE2418118FFB8EB00A3CB5A /* f003.png in Resources */,
+				26FD3C931A71FA4C00DDB0F7 /* AlbumCell.xib in Resources */,
 				CCE2426618FFB8EB00A3CB5A /* 3.jpeg in Resources */,
 				CCE2427418FFB8EB00A3CB5A /* head_temp11.jpg in Resources */,
 				CCE2425A18FFB8EB00A3CB5A /* 见钱开眼.gif in Resources */,
@@ -2806,6 +2851,7 @@
 				CCE242F518FFB8EB00A3CB5A /* GCDMulticastDelegate.m in Sources */,
 				CCC541471904C61A00C02C86 /* JXRoomObject.m in Sources */,
 				CCE2415618FFB8EB00A3CB5A /* UIView+Animation.m in Sources */,
+				26FD3C861A71F9DA00DDB0F7 /* RootViewController.m in Sources */,
 				CCE2420E18FFB8EB00A3CB5A /* XMPPvCardTempAdr.m in Sources */,
 				CCE241EF18FFB8EB00A3CB5A /* XMPPRoster.xcdatamodel in Sources */,
 				CCC5414A1904C62800C02C86 /* JXRoomPool.m in Sources */,
@@ -2832,6 +2878,7 @@
 				CCE2422218FFB8EB00A3CB5A /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,
 				CCE242FC18FFB8EB00A3CB5A /* XMPPJID.m in Sources */,
 				CCE2422C18FFB8EB00A3CB5A /* XMPPAttentionModule.m in Sources */,
+				26FD3C941A71FA4C00DDB0F7 /* PhotoCell.m in Sources */,
 				CCE242D118FFB8EB00A3CB5A /* JXSelectImageView.m in Sources */,
 				CCE2422818FFB8EB00A3CB5A /* XMPPPing.m in Sources */,
 				CCE2422A18FFB8EB00A3CB5A /* XMPPTime.m in Sources */,
@@ -2879,6 +2926,7 @@
 				CCE2415E18FFB8EB00A3CB5A /* ChatVoiceRecorderVC.m in Sources */,
 				CCE2423118FFB8EB00A3CB5A /* FMDatabaseQueue.m in Sources */,
 				CCE241E118FFB8EB00A3CB5A /* JXEmoji.m in Sources */,
+				26FD3C981A71FA6200DDB0F7 /* AlbumPhotosListView.m in Sources */,
 				CCE242DC18FFB8EB00A3CB5A /* SBJsonStreamParserAdapter.m in Sources */,
 				CCE241FD18FFB8EB00A3CB5A /* XMPPRoomOccupantCoreDataStorageObject.m in Sources */,
 				CCE2422418FFB8EB00A3CB5A /* XMPPMessageArchiving.m in Sources */,
@@ -2894,6 +2942,7 @@
 				CCE2422518FFB8EB00A3CB5A /* XMPPvCardAvatarModule.m in Sources */,
 				CCE242CB18FFB8EB00A3CB5A /* JXMessageObject.m in Sources */,
 				CCE241DF18FFB8EB00A3CB5A /* FaceViewController.m in Sources */,
+				26FD3C8B1A71FA3600DDB0F7 /* UserAlbumListView.m in Sources */,
 				CCE2422918FFB8EB00A3CB5A /* XMPPAutoTime.m in Sources */,
 				CCE2430118FFB8EB00A3CB5A /* XMPPStream.m in Sources */,
 				CCE2415C18FFB8EB00A3CB5A /* ChatRecorderView.m in Sources */,
@@ -2903,6 +2952,7 @@
 				CCE2420218FFB8EB00A3CB5A /* XMPPRoomMemoryStorage.m in Sources */,
 				CCE2416218FFB8EB00A3CB5A /* ASIAuthenticationDialog.m in Sources */,
 				CCE242E318FFB8EB00A3CB5A /* SBJsonWriter.m in Sources */,
+				26FD3C921A71FA4C00DDB0F7 /* AlbumCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
