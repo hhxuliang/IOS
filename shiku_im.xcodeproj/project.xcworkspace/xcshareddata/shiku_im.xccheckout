@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>30ED12EC-49D9-4B1C-91EA-1491E45D9749</string>
+	<key>IDESourceControlProjectName</key>
+	<string>shiku_im</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>15214621B2BDF00DF9A66234E35AE786D88FB63A</key>
+		<string>https://github.com/hhxuliang/IOS</string>
+		<key>FC6544732596B9773F590E1CE638300499F96C8F</key>
+		<string>https://github.com/hhxuliang/android_app</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>shiku_im.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>15214621B2BDF00DF9A66234E35AE786D88FB63A</key>
+		<string>../..</string>
+		<key>FC6544732596B9773F590E1CE638300499F96C8F</key>
+		<string>../../../Volumes/192.168.8.1/Android_dev/android/Android_OO/android_app_new</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/hhxuliang/IOS</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>15214621B2BDF00DF9A66234E35AE786D88FB63A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FC6544732596B9773F590E1CE638300499F96C8F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>android_app_new</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>15214621B2BDF00DF9A66234E35AE786D88FB63A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>dev</string>
+		</dict>
+	</array>
+</dict>
+</plist>
