@@ -9,18 +9,20 @@
 /* Begin PBXBuildFile section */
 		2069541718439E69007F1FED /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2069541518439E69007F1FED /* AudioToolbox.framework */; };
 		2069541818439E69007F1FED /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2069541618439E69007F1FED /* AVFoundation.framework */; };
+		260B07191A73A74F00BAACFE /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 260B07181A73A74F00BAACFE /* MBProgressHUD.m */; };
 		260E1C361A71130300D4EDDE /* agt.png in Resources */ = {isa = PBXBuildFile; fileRef = 260E1C351A71130300D4EDDE /* agt.png */; };
 		264955091A663A9600EAD70A /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 264955081A663A9600EAD70A /* AsyncSocket.m */; };
 		2675A80D1A6E2B80006A68BE /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2675A80C1A6E2B7F006A68BE /* AssetsLibrary.framework */; };
 		26A395021A6CE4DF007B7FDC /* HttpFileOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A395011A6CE4DF007B7FDC /* HttpFileOperation.m */; };
 		26FD3C861A71F9DA00DDB0F7 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FD3C841A71F9DA00DDB0F7 /* RootViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26FD3C871A71F9DA00DDB0F7 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26FD3C851A71F9DA00DDB0F7 /* RootViewController.xib */; };
-		26FD3C8B1A71FA3600DDB0F7 /* UserAlbumListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FD3C8A1A71FA3600DDB0F7 /* UserAlbumListView.m */; };
-		26FD3C921A71FA4C00DDB0F7 /* AlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FD3C8D1A71FA4C00DDB0F7 /* AlbumCell.m */; };
+		26FD3C8B1A71FA3600DDB0F7 /* UserAlbumListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FD3C8A1A71FA3600DDB0F7 /* UserAlbumListView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		26FD3C921A71FA4C00DDB0F7 /* AlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FD3C8D1A71FA4C00DDB0F7 /* AlbumCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26FD3C931A71FA4C00DDB0F7 /* AlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26FD3C8E1A71FA4C00DDB0F7 /* AlbumCell.xib */; };
 		26FD3C941A71FA4C00DDB0F7 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FD3C901A71FA4C00DDB0F7 /* PhotoCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		26FD3C951A71FA4C00DDB0F7 /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26FD3C911A71FA4C00DDB0F7 /* PhotoCell.xib */; };
-		26FD3C981A71FA6200DDB0F7 /* AlbumPhotosListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FD3C971A71FA6200DDB0F7 /* AlbumPhotosListView.m */; };
+		26FD3C981A71FA6200DDB0F7 /* AlbumPhotosListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FD3C971A71FA6200DDB0F7 /* AlbumPhotosListView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		26FD3C9A1A7212F500DDB0F7 /* selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26FD3C991A7212F500DDB0F7 /* selected@2x.png */; };
 		840016DD17BBB7870073EB8E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 840016DC17BBB7870073EB8E /* libsqlite3.dylib */; };
 		8409055A17B693CF00F5C28D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8409055917B693CF00F5C28D /* UIKit.framework */; };
 		8409055C17B693CF00F5C28D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8409055B17B693CF00F5C28D /* Foundation.framework */; };
@@ -474,6 +476,8 @@
 /* Begin PBXFileReference section */
 		2069541518439E69007F1FED /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2069541618439E69007F1FED /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		260B07171A73A74F00BAACFE /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		260B07181A73A74F00BAACFE /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		260E1C351A71130300D4EDDE /* agt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agt.png; sourceTree = "<group>"; };
 		264955071A663A9600EAD70A /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
 		264955081A663A9600EAD70A /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
@@ -493,6 +497,7 @@
 		26FD3C911A71FA4C00DDB0F7 /* PhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
 		26FD3C961A71FA6200DDB0F7 /* AlbumPhotosListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumPhotosListView.h; sourceTree = "<group>"; };
 		26FD3C971A71FA6200DDB0F7 /* AlbumPhotosListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumPhotosListView.m; sourceTree = "<group>"; };
+		26FD3C991A7212F500DDB0F7 /* selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected@2x.png"; sourceTree = "<group>"; };
 		840016DC17BBB7870073EB8E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		8409055617B693CF00F5C28D /* shiku_im.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shiku_im.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8409055917B693CF00F5C28D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -596,7 +601,7 @@
 		CCE23EEF18FFB8EA00A3CB5A /* NSXMLElement+XMPP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSXMLElement+XMPP.m"; sourceTree = "<group>"; };
 		CCE23EF118FFB8EA00A3CB5A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CCE23EF218FFB8EA00A3CB5A /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
-		CCE23EF318FFB8EA00A3CB5A /* default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default@2x.png"; sourceTree = "<group>"; };
+		CCE23EF318FFB8EA00A3CB5A /* default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "default@2x.png"; path = "../default@2x.png"; sourceTree = "<group>"; };
 		CCE23EFB18FFB8EA00A3CB5A /* emojiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = emojiViewController.h; sourceTree = "<group>"; };
 		CCE23EFC18FFB8EA00A3CB5A /* emojiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = emojiViewController.m; sourceTree = "<group>"; };
 		CCE23EFE18FFB8EA00A3CB5A /* f000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = f000.png; sourceTree = "<group>"; };
@@ -1221,6 +1226,8 @@
 		CC4991AC18FFD8A0000C07CD /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				260B07171A73A74F00BAACFE /* MBProgressHUD.h */,
+				260B07181A73A74F00BAACFE /* MBProgressHUD.m */,
 				264955071A663A9600EAD70A /* AsyncSocket.h */,
 				264955081A663A9600EAD70A /* AsyncSocket.m */,
 				CCE240E218FFB8EB00A3CB5A /* Photo.h */,
@@ -1280,7 +1287,6 @@
 				CCE23EBD18FFB8EA00A3CB5A /* AppDelegate.m */,
 				CCE23EF118FFB8EA00A3CB5A /* Default-568h@2x.png */,
 				CCE23EF218FFB8EA00A3CB5A /* default.png */,
-				CCE23EF318FFB8EA00A3CB5A /* default@2x.png */,
 				CCE23F6F18FFB8EA00A3CB5A /* InfoPlist.strings */,
 				CCE240E118FFB8EB00A3CB5A /* main.m */,
 				CCE2410018FFB8EB00A3CB5A /* shiku_im-Info.plist */,
@@ -2196,7 +2202,9 @@
 		CCE2405A18FFB8EB00A3CB5A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				CCE23EF318FFB8EA00A3CB5A /* default@2x.png */,
 				260E1C351A71130300D4EDDE /* agt.png */,
+				26FD3C991A7212F500DDB0F7 /* selected@2x.png */,
 				CC4991B318FFDA9B000C07CD /* keyboard_n@2x.png */,
 				CC4991B418FFDA9B000C07CD /* face_n@2x.png */,
 				CC4991B518FFDA9B000C07CD /* new_top@2x.png */,
@@ -2684,6 +2692,7 @@
 				CCE241B918FFB8EB00A3CB5A /* f059.png in Resources */,
 				CCE242B718FFB8EB00A3CB5A /* ToolViewInputVoiceHL@2x.png in Resources */,
 				CCE2419418FFB8EB00A3CB5A /* f022.png in Resources */,
+				26FD3C9A1A7212F500DDB0F7 /* selected@2x.png in Resources */,
 				CCE242B518FFB8EB00A3CB5A /* ToolViewInputTextHL@2x.png in Resources */,
 				CCE2419318FFB8EB00A3CB5A /* f021.png in Resources */,
 				CCE2424618FFB8EB00A3CB5A /* 嘘！安静.gif in Resources */,
@@ -2832,6 +2841,7 @@
 				CCE241E218FFB8EB00A3CB5A /* JXImageView.m in Sources */,
 				CCE241F518FFB8EB00A3CB5A /* XMPPRoster.m in Sources */,
 				CCE2416E18FFB8EB00A3CB5A /* XMPPDigestMD5Authentication.m in Sources */,
+				260B07191A73A74F00BAACFE /* MBProgressHUD.m in Sources */,
 				CCE242FB18FFB8EB00A3CB5A /* XMPPIQ.m in Sources */,
 				CCE2421B18FFB8EB00A3CB5A /* XMPPCapabilities.xcdatamodel in Sources */,
 				CCE242DE18FFB8EB00A3CB5A /* SBJsonStreamWriter.m in Sources */,
