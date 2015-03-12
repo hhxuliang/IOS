@@ -10,6 +10,7 @@
 #import "JXLabel.h"
 #import "JXRegisterViewController.h"
 #import "JXMainViewController.h"
+#import "MBProgressHUD.h"
 
 @interface JXLoginViewController ()
 
@@ -23,7 +24,7 @@
     if (self) {
         self.heightFooter = 49;
         self.heightHeader = 44;
-        self.isGotoBack   = YES;
+        self.isGotoBack   = NO;
         self.title = @"登录";
         [self createHeadAndFoot];
 
@@ -58,7 +59,7 @@
         lb.backgroundColor = [UIColor clearColor];
         lb.font = [UIFont systemFontOfSize:13];
         lb.numberOfLines = 0;
-        lb.text = @"本服务器非24小时开启，若急需请关注微信公众号：视酷即时通讯，手机18665366227";
+        lb.text = @"";
         [_table addSubview:lb];
         [lb release];
 
@@ -120,6 +121,7 @@
 }
 
 -(void)onClick{
+    hub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *send_msg_format = @"{\"TranObjectType\":\"1\",\"fromUser\":0,\"toUser\":0,\"crowd\":0,\"fromusername\":\"%@\",\"fromimg\":\"\",\"TranObject\":{\"id\":\"2077\",\"mobile_NO\":\"\",\"name\":\"%@\",\"email\":\"\",\"password\":\"%@\",\"isOnline\":\"\",\"img\":\"\",\"group\":\"\",\"ip\":\"\",\"port\":\"\",\"iscrowd\":\"\",\"platform\":\"IOS\"}}";
     NSString *msgtxt= [[NSString alloc]initWithFormat:send_msg_format,_user.text,_user.text,_pwd.text];
     [[JXXMPP sharedInstance] sendMsg:msgtxt];//发送消息
@@ -132,7 +134,7 @@
     NSLog(@"response:%@",response);
     SBJsonParser *paser=[[[SBJsonParser alloc]init]autorelease];
     NSDictionary *rootDic=[paser objectWithString:response];
-    
+    [hub show:YES];
     int resultCode=[[rootDic objectForKey:@"resultCode"]intValue];
     if (TRUE) {
         NSLog(@"登陆成功");

@@ -22,6 +22,7 @@
 #import "emojiViewController.h"
 #import "JXLoginViewController.h"
 #import "HttpFileOperation.h"
+#import "UserAlbumListView.h"
 #define height_Top   44
 #define height_Toolbar   49
 #define height_table JX_SCREEN_HEIGHT-height_Toolbar-height_Top-20
@@ -541,8 +542,8 @@
 -(void)newMsgCome:(NSNotification *)notifacation
 {
     [self.tabBarController.tabBarItem setBadgeValue:@"1"];
+    
     JXMessageObject *msg = [notifacation.userInfo objectForKey:@"newMsg"];
-
     if(msg!=nil && ([msg.fromUserId isEqualToString:_chatPerson.userId] || [msg.toUserId isEqualToString:_chatPerson.userId] || [msg.toUserId isEqualToString:self.roomName] )){
         NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
         [_array addObject:msg];
@@ -554,41 +555,56 @@
         [indexPaths release];
         [_table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_array.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
-    msg = nil;
-    NSDictionary * msgd = [notifacation.userInfo objectForKey:@"MsgSendOut"];
     
+    NSDictionary * msgd = [notifacation.userInfo objectForKey:@"MsgSendOut"];
     if(msgd!=nil && ([[msgd objectForKey:@"toUid"] isEqualToString:_chatPerson.userId] || [[msgd objectForKey:@"toUid"] isEqualToString:_chatPerson.userId]))
     {
-    JXMessageObject *unionObj=nil;
-    for(int i=[_array count]-1;i>=0;i--){
-        unionObj=[_array objectAtIndex:i];
-            if([[msgd objectForKey:@"datekey"] isEqualToString:unionObj.datekey])
-            {
-                NSIndexPath* index=[NSIndexPath indexPathForRow:i inSection:0];
-                JXMsgCell* cell = (JXMsgCell*)[_table cellForRowAtIndexPath:index];
-                [cell updateIsSendOut:YES];
-                break;
-            }
-        unionObj = nil;
-    }
+        JXMessageObject *unionObj=nil;
+        for(int i=[_array count]-1;i>=0;i--){
+            unionObj=[_array objectAtIndex:i];
+                if([[msgd objectForKey:@"datekey"] isEqualToString:unionObj.datekey])
+                {
+                    NSIndexPath* index=[NSIndexPath indexPathForRow:i inSection:0];
+                    JXMsgCell* cell = (JXMsgCell*)[_table cellForRowAtIndexPath:index];
+                    [cell updateIsSendOut:YES];
+                    break;
+                }
+            unionObj = nil;
+        }
     }
     
+    msgd = nil;
     msg = nil;
 }
 
 
 #pragma mark sharemore按钮组协议
-
+-(void ) pickPhotoByCamera
+{
+     UIImagePickerController *imgPicker=[[UIImagePickerController alloc]init];
+     [imgPicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+     [imgPicker setDelegate:self];
+     [imgPicker setAllowsEditing:NO];
+     [self presentViewController:imgPicker animated:YES completion:^{
+     }];
+}
 -(void)pickPhoto
 {
     
-    UIImagePickerController *imgPicker=[[UIImagePickerController alloc]init];
+    /*UIImagePickerController *imgPicker=[[UIImagePickerController alloc]init];
     [imgPicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     [imgPicker setDelegate:self];
     [imgPicker setAllowsEditing:NO];
     [self presentViewController:imgPicker animated:YES completion:^{
-    }];
+    }];*/
     
+    /*RootViewController *picView=[[RootViewController alloc] init];
+    [g_App.window addSubview:picView.view];
+    picView.view.hidden = NO;
+    */
+    UserAlbumListView *userAlbum=[[UserAlbumListView alloc] init];
+    UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:userAlbum];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 

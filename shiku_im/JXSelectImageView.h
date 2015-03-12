@@ -11,6 +11,7 @@
 
 @optional
 -(void)pickPhoto;
+-(void)pickPhotoByCamera;
 -(UIImage *)imageDidFinishPicking;
 -(UIImage *)cameraDidFinishPicking;
 -(CLLocation *)locationDidFinishPicking;

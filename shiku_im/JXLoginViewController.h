@@ -7,10 +7,13 @@
 
 #import <UIKit/UIKit.h>
 #import "PullRefreshTableViewController.h"
+#import "MBProgressHUD.h"
 
 @interface JXLoginViewController : PullRefreshTableViewController{
     UITextField* _user;
     UITextField* _pwd;
+    MBProgressHUD * hub;
 }
 -(void)loginSuccess:(NSString*)response;
+-(void)loginFail;
 @end

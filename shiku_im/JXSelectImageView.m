@@ -27,6 +27,12 @@
         [_photoButton addTarget:self action:@selector(pickPhoto) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_photoButton];
         
+        _cameraButton =[UIButton buttonWithType:UIButtonTypeCustom];
+        [_cameraButton setFrame:CGRectMake(INSETS +CHAT_BUTTON_SIZE, INSETS, CHAT_BUTTON_SIZE , CHAT_BUTTON_SIZE)];
+        [_cameraButton setImage:[UIImage imageNamed:@"sharemore_video"] forState:UIControlStateNormal];
+        [_cameraButton addTarget:self action:@selector(pickPhotoByCamera) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_cameraButton];
+        
     }
     return self;
 }
@@ -49,6 +55,10 @@
     [_delegate pickPhoto];
 }
 
+-(void)pickPhotoByCamera
+{
+    [_delegate pickPhotoByCamera];
+}
 //-(UIImage *)imageDidFinishPicking
 //{
 //    

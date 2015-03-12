@@ -32,6 +32,10 @@
     [_select_Btn.layer setCornerRadius:_select_Btn.frame.size.height/2];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Return_Image_Action:) name:@"RETURN_IMAGE_SELECT" object:nil];
+    
+    UserAlbumListView *userAlbum=[[UserAlbumListView alloc] init];
+    UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:userAlbum];
+    [self presentViewController:nav animated:YES completion:nil];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -53,4 +57,5 @@
         [img setImage:images[i]];
     }
 }
+
 @end

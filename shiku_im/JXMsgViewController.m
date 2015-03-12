@@ -200,6 +200,7 @@
     [JXMessageObject updateNewMsgsTo0:unionObj.user.userId];
     [sendView init];
     [sendView setChatPerson:unionObj.user];
+    g_App.chartVc = sendView;
     [g_App.window addSubview:sendView.view];
     sendView.view.hidden = NO;
 }
