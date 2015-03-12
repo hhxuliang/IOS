@@ -98,7 +98,7 @@ static JXXMPP *sharedManager;
     int stat = [self connectServer:HOST_IP port:HOST_PORT];
     switch (stat) {
         case SRV_CONNECT_SUC:
-            [self showMessage:@"connect success"];
+            //[self showMessage:@"connect success"];
             break;
         case SRV_CONNECTED:
             //[self showMessage:@"It's connected,don't agian"];
