@@ -7,7 +7,8 @@
 //
 #import "AlbumPhotosListView.h"
 #import "PhotoCell.h"
-
+#import "HttpFileOperation.h"
+#import "AppDelegate.h"
 #define MAXIMAGE 10
 
 @interface AlbumPhotosListView ()<ImageSelectedDelegate>
@@ -16,7 +17,7 @@
 @end
 
 @implementation AlbumPhotosListView
-@synthesize dataSource,assetGroup,selectCount,selectImages;
+@synthesize dataSource,assetGroup,selectCount,selectImages,selectImages_path;
 
 - (void)viewDidLoad
 {
@@ -24,6 +25,7 @@
     [self.view setBackgroundColor:[UIColor blackColor]];
     dataSource=[NSMutableArray array];
     selectImages=[NSMutableArray array];
+    selectImages_path=[NSMutableArray array];
     CGRect viewFrame=self.view.frame;
     self.maintableview=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, viewFrame.size.width, viewFrame.size.height-44) style:UITableViewStylePlain];
     [self.maintableview setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -74,7 +76,15 @@
 
 }
 -(void) select_Compeleted{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"RETURN_IMAGE_SELECT" object:nil userInfo:@{@"images":selectImages}];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"RETURN_IMAGE_SELECT" object:nil userInfo:@{@"images":selectImages}];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"RETURN_IMAGE_SELECT" object:nil userInfo:nil];
+    //[[NSNotificationCenter defaultCenter]postNotificationName:kXMPPNewMsgNotifaction object:nil userInfo:@{@"MsgPicturesSendOut_Img":selectImages,@"MsgPicturesSendOut_Path":selectImages_path}];
+    if(selectImages!=nil && selectImages_path!=nil)
+    {
+        for(int i=0;i<[selectImages_path count];i++){
+            [HttpFileOperation postFileByImage:selectImages[i] col:g_App.chartVc path:selectImages_path[i]];
+        }
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -153,11 +163,13 @@
     if([mdic[@"selected"] boolValue]){
         [mdic setValue:@"NO" forKey:@"selected"];
         [selectImages removeObject:mdic[@"image"]];
+        [selectImages_path removeObject:mdic[@"image_path"]];
         
     }else{
         if(selectImages.count<MAXIMAGE){
             [mdic setValue:@"YES" forKey:@"selected"];
             [selectImages addObject:mdic[@"image"]];
+            [selectImages_path addObject:mdic[@"image_path"]];
         }else{
             UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"最多只能选择%d张图片",MAXIMAGE] delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
             [alertView show];
@@ -186,7 +198,8 @@
     [ptotoGroup enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
         if (result) {
             if ([[result valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
-                NSDictionary *dic=@{@"image":[UIImage imageWithCGImage:result.thumbnail],@"selected":@"NO"};
+                //NSDictionary *dic=@{@"image":[UIImage imageWithCGImage:result.thumbnail],@"selected":@"NO"};
+                NSDictionary *dic=@{@"image_path":[[[result defaultRepresentation] url] absoluteString],@"image":[UIImage imageWithCGImage:result.thumbnail],@"selected":@"NO"};
                 [dataSource addObject:dic];
             }
         }

@@ -11,10 +11,12 @@
 #import <AssetsLibrary/ALAsset.h>
 #import <AssetsLibrary/ALAssetsGroup.h>
 #import <AssetsLibrary/ALAssetRepresentation.h>
-
+#import "JXChatViewController.h"
 
 @interface AlbumPhotosListView : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSMutableArray *selectImages;
+@property (nonatomic, strong) NSMutableArray *selectImages_path;
 @property (nonatomic, strong) UITableView *maintableview;
 @property (nonatomic, strong) ALAssetsGroup *assetGroup;
+@property (nonatomic, strong) JXChatViewController* col;
 @end

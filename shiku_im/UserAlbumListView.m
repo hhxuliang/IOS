@@ -9,6 +9,7 @@
 #import "UserAlbumListView.h"
 #import "AlbumPhotosListView.h"
 #import "AlbumCell.h"
+#import "JXChatViewController.h"
 
 @interface UserAlbumListView ()
 @property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
@@ -26,6 +27,7 @@
     }
     return self;
 }
+
 
 - (void)viewDidLoad
 {
