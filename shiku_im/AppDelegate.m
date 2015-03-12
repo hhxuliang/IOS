@@ -10,9 +10,10 @@
 #import "JXMainViewController.h"
 #import "emojiViewController.h"
 #import "JXEmptyViewController.h"
+#import "JXLoginViewController.h"
 
 @implementation AppDelegate
-@synthesize window,faceView,mainVc,groupVC,loginVC;
+@synthesize window,faceView,mainVc,groupVC,loginVC,chartVc;
 
 - (void)dealloc
 {
@@ -32,6 +33,18 @@
     
     mainVc=[[JXMainViewController alloc]init];
     [self.window addSubview:mainVc.view];
+    
+    //if(![JXXMPP sharedInstance].isLogined)
+    
+    NSString* name=[[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_LoginName];
+    NSString* pw=[[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_PASSWORD];
+    
+    if(YES)//(name==nil && pw==nil)
+    {
+        JXLoginViewController* vc = [[JXLoginViewController alloc]init];
+        [g_App.window addSubview:vc.view];
+        //return;
+    }
     
     faceView = [[emojiViewController alloc]initWithFrame:CGRectMake(0, JX_SCREEN_HEIGHT-218, 320, 218)];
     [self.window makeKeyAndVisible];

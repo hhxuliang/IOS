@@ -11,6 +11,7 @@
 @class JXMainViewController;
 @class JXLoginViewController;
 @class JXGroupViewController;
+@class JXChatViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>{
 
@@ -32,4 +33,5 @@
 @property (retain, nonatomic) JXGroupViewController* groupVC;
 @property (retain, nonatomic) JXLoginViewController* loginVC;
 @property (retain, nonatomic) JXMainViewController *mainVc;
+@property (retain, nonatomic) JXChatViewController *chartVc;
 @end
