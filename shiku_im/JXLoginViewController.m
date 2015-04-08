@@ -11,7 +11,7 @@
 #import "JXRegisterViewController.h"
 #import "JXMainViewController.h"
 #import "MBProgressHUD.h"
-
+#import <CommonCrypto/CommonDigest.h>
 @interface JXLoginViewController ()
 
 @end
@@ -85,7 +85,7 @@
         _pwd.returnKeyType = UIReturnKeyDone;
         _pwd.clearButtonMode = UITextFieldViewModeWhileEditing;
         _pwd.placeholder = @"请输入密码";
-        [[NSUserDefaults standardUserDefaults]setObject:@"e10adc3949ba59abbe56e057f20f883e" forKey:kMY_USER_PASSWORD];
+        [[NSUserDefaults standardUserDefaults]setObject:@"123456" forKey:kMY_USER_PASSWORD];
         [_table addSubview:_pwd];
         [_pwd release];
         g_App.loginVC = self;
@@ -122,8 +122,19 @@
 
 -(void)onClick{
     hub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    const char *original_str = [_pwd.text UTF8String];
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(original_str, strlen(original_str), result);
+    NSMutableString *hash = [NSMutableString string];
+    for (int i = 0; i < 16; i++)
+        [hash appendFormat:@"%02x", result[i]];
+    
+    NSString *pwdtxt=[hash lowercaseString];
+    
+    
     NSString *send_msg_format = @"{\"TranObjectType\":\"1\",\"fromUser\":0,\"toUser\":0,\"crowd\":0,\"fromusername\":\"%@\",\"fromimg\":\"\",\"TranObject\":{\"id\":\"2077\",\"mobile_NO\":\"\",\"name\":\"%@\",\"email\":\"\",\"password\":\"%@\",\"isOnline\":\"\",\"img\":\"\",\"group\":\"\",\"ip\":\"\",\"port\":\"\",\"iscrowd\":\"\",\"platform\":\"IOS\"}}";
-    NSString *msgtxt= [[NSString alloc]initWithFormat:send_msg_format,_user.text,_user.text,_pwd.text];
+    NSString *msgtxt= [[NSString alloc]initWithFormat:send_msg_format,_user.text,_user.text,pwdtxt];
     [[JXXMPP sharedInstance] sendMsg:msgtxt];//发送消息
     [msgtxt release];
     [send_msg_format release];
@@ -195,7 +206,7 @@
 #pragma mark  -------请求错误--------
 - (void)requestError:(ASIFormDataRequest*)request
 {
-    [g_App showAlert:[NSString stringWithFormat:@"服务器登录失败,本demo服务器非24小时开启，若急需请手机18665366227，错误码：%@",request.error.localizedDescription]];
+    [g_App showAlert:[NSString stringWithFormat:@"服务器登录失败,若急需请手机13910009603，错误码：%@",request.error.localizedDescription]];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

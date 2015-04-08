@@ -153,8 +153,10 @@ static JXXMPP *sharedManager;
     
     NSString* aStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"Hava received datas is :%@",aStr);
-    if(aStr == nil)
+    if(aStr == nil){
+        [client readDataWithTimeout:-1 tag:0];
         return;
+    }
     if(receivebuf==nil)
         receivebuf=[[NSString alloc] initWithFormat:@""];
     NSString* aStr_tmp = [[NSString alloc] initWithString:[receivebuf stringByAppendingString:aStr]];
@@ -168,6 +170,7 @@ static JXXMPP *sharedManager;
         receivebuf = [[NSString alloc] initWithString:aStr_tmp];
         [aStr release];
         [aStr_tmp release];
+        [client readDataWithTimeout:-1 tag:0];
         return;
     }
     
@@ -179,6 +182,7 @@ static JXXMPP *sharedManager;
     NSDictionary *rootDic=[paser objectWithString:msg];
     if(rootDic==nil){
         NSLog(@"Hava received error json datas");
+        [client readDataWithTimeout:-1 tag:0];
         return;
     }
     int TranObjectType=[[rootDic objectForKey:@"TranObjectType"] intValue];
